@@ -33,4 +33,22 @@ namespace rust
         else
             return Result(m_error);
     }
+
+    template<typename T, typename E>
+    T Result<T, E>::unwrap_or(T optb)
+    {
+        if(is_ok())
+            return m_value;
+        else
+            return optb;
+    }
+
+    template<typename T, typename E>
+    T Result<T, E>::unwrap_or_else(std::function<T(E)> op)
+    {
+        if(is_ok())
+            return m_value;
+        else
+            return op(m_error);
+    }
 }

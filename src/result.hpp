@@ -20,6 +20,10 @@ namespace rust
 
         template<typename F>
         Result<T, E> and_then(std::function<F> f);
+
+        T unwrap_or(T optb);
+
+        T unwrap_or_else(std::function<T(E)> op);
     private:
         T m_value;
         E m_error;
