@@ -12,5 +12,12 @@ int main()
         return 1;
     }
 
+    rust::Result<int, std::string> result_test2(std::string("An error has occurred!"));
+
+    if(!result_test2.is_err())
+    {
+        return 1;
+    }
+
     return 0;
 }
