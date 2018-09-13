@@ -1,4 +1,4 @@
 container:
   image: gcc:latest
 task:
-  tests_script: g++ -o test_program test/test.cpp && test_program
+  tests_script: g++ -o test_program test/test.cpp && ./test_program
