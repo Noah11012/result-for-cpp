@@ -25,7 +25,7 @@ namespace rust
         if(m_t_contains_value)
             return std::make_optional<T>(m_value);
         else
-            return std::make_optional<T>(std::nullopt_t);
+            return std::make_optional<T>(std::nullopt);
     }
 
     template<typename T, typename E>
