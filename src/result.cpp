@@ -13,9 +13,8 @@ namespace rust
     {
         Result<T, E> result;
 
-        result.m_error{error};
-        result.m_value{};
-        result.m_t_contains_value{false};
+        result.m_error = error;
+        result.m_t_contains_value = false;
 
         return result;
     }
