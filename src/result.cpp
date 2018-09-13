@@ -9,9 +9,15 @@ namespace rust
     }
 
     template<typename T, typename E>
-    Result<T, E>::Result(E error): m_value{}, m_error{error}, m_t_contains_value{false}
+    Result<T, E> Result<T, E>::from_error(E error)
     {
-        
+        Result<T, E> result;
+
+        result.m_error{error};
+        result.m_value{};
+        result.m_t_contains_value{false};
+
+        return result;
     }
 
     template<typename T, typename E>
