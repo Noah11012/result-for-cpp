@@ -1,3 +1,5 @@
+[![Build Status](https://api.cirrus-ci.com/github/Noah11012/result-for-cpp.svg)](https://cirrus-ci.com/github/Noah11012/result-for-cpp)
+
 # C++ Result
 This is an implementation in C++ of Rust's Result. This is a WIP so not all methods found on Rust's Result type will be here at first. If you would like to help and implement the features found in Rust's Result, that would be appreciated.
 
