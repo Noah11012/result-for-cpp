@@ -20,10 +20,19 @@ namespace rust
     }
 
     template<typename T, typename E>
+    std::optional<T> Result<T, E>::ok()
+    {
+        if(m_t_contains_value)
+            return std::make_optional<T>(m_value);
+        else
+            return std::make_optional<T>(std::nullopt_t);
+    }
+
+    template<typename T, typename E>
     template<typename F>
     Result<T, E> Result<T, E>::or_else(std::function<F> f)
     {
-        if(is_err())
+        if(!m_t_contains_value)
             f();
         else
             return Result(m_value);
@@ -33,7 +42,7 @@ namespace rust
     template<typename F>
     Result<T, E> Result<T, E>::and_then(std::function<F> f)
     {
-        if(is_ok())
+        if(m_t_contains_value)
             f();
         else
             return Result(m_error);
@@ -42,7 +51,7 @@ namespace rust
     template<typename T, typename E>
     T Result<T, E>::unwrap_or(T optb)
     {
-        if(is_ok())
+        if(m_t_contains_value)
             return m_value;
         else
             return optb;
@@ -51,7 +60,7 @@ namespace rust
     template<typename T, typename E>
     T Result<T, E>::unwrap_or_else(std::function<T(E)> op)
     {
-        if(is_ok())
+        if(m_t_contains_value)
             return m_value;
         else
             return op(m_error);

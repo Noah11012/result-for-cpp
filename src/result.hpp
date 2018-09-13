@@ -1,4 +1,5 @@
 #include <functional>
+#include <optional>
 
 namespace rust
 {
@@ -14,6 +15,8 @@ namespace rust
 
         bool is_ok() const { return m_t_contains_value; }
         bool is_err() const { return !m_t_contains_value; }
+
+        std::optional<T> ok();
 
         template<typename F>
         Result<T, E> or_else(std::function<F> f);
