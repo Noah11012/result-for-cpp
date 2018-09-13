@@ -1,9 +1,0 @@
-version: 2
-jobs:
-  build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: docker/gcc:latest # the primary container, where your job's commands are run
-    steps:
-      - checkout # check out the code in the project directory
-      - run: docker pull gcc
-      - run: g++ -o test_program test/test.cpp && ./test_program && rm test_program
