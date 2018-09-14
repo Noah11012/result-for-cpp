@@ -38,21 +38,19 @@ namespace rust
     }
 
     template<typename T, typename E>
-    template<typename F>
-    Result<T, E> Result<T, E>::or_else(std::function<F> f)
+    Result<T, E> Result<T, E>::or_else(std::function<Result<T, E>(E)> op)
     {
         if(!m_t_contains_value)
-            f();
+            return op(m_error);
         else
             return Result(m_value);
     }
 
     template<typename T, typename E>
-    template<typename F>
-    Result<T, E> Result<T, E>::and_then(std::function<F> f)
+    Result<T, E> Result<T, E>::and_then(std::function<Result<T, E>(T)> f)
     {
         if(m_t_contains_value)
-            f();
+            return f(m_value);
         else
             return Result(m_error);
     }
