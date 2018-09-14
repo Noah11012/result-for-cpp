@@ -13,6 +13,8 @@ int test1()
 
     if(r.is_err())
         return -1;
+    
+    return 0;
 }
 
 int main()
