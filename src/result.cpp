@@ -29,6 +29,15 @@ namespace rust
     }
 
     template<typename T, typename E>
+    std::optional<T> Result<T, E>::err()
+    {
+        if(!m_t_contains_value)
+            return std::make_optional<E>(m_error);
+        else
+            return std::make_optional<T>(std::nullopt);
+    }
+
+    template<typename T, typename E>
     template<typename F>
     Result<T, E> Result<T, E>::or_else(std::function<F> f)
     {
