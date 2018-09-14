@@ -13,6 +13,7 @@ namespace rust
     {
         Result<T, E> result;
 
+        result.m_value = T{};
         result.m_error = error;
         result.m_t_contains_value = false;
 
@@ -25,16 +26,16 @@ namespace rust
         if(m_t_contains_value)
             return std::make_optional<T>(m_value);
         else
-            return std::make_optional<T>(std::nullopt);
+            return std::nullopt;
     }
 
     template<typename T, typename E>
-    std::optional<T> Result<T, E>::err()
+    std::optional<E> Result<T, E>::err()
     {
         if(!m_t_contains_value)
             return std::make_optional<E>(m_error);
         else
-            return std::make_optional<T>(std::nullopt);
+            return std::nullopt;
     }
 
     template<typename T, typename E>

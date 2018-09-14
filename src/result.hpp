@@ -17,7 +17,7 @@ namespace rust
         bool is_err() const { return !m_t_contains_value; }
 
         std::optional<T> ok();
-        std::optional<T> err();
+        std::optional<E> err();
 
         Result<T, E> or_else(std::function<Result<T, E>(E)> op);
 
