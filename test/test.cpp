@@ -36,12 +36,31 @@ int test2()
     return 0;
 }
 
+rust::Result<int, std::string> test_function1(std::string s)
+{
+    std::cout << s << "\n";
+    return rust::Result<int, std::string>(200);
+}
+
+int test3()
+{
+    rust::Result<int, std::string> r(100);
+
+    int number = r.or_else(test_function1).unwrap_or(-1);
+
+    if(number != 200)
+        return -1;
+    
+    return 0;
+}
+
 int main()
 {
     int status = 0;
 
     status = test1();
     status = test2();
+    status = test3();
 
     return status;
 }
