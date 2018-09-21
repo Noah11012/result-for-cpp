@@ -39,7 +39,7 @@ int test2()
 rust::Result<int, std::string> test_function1(std::string s)
 {
     std::cout << s << "\n";
-    return rust::Result<int, std::string>(200);
+    return rust::Result<int, std::string>(1000);
 }
 
 int test3()
@@ -48,9 +48,18 @@ int test3()
 
     int number = r.or_else(test_function1).unwrap_or(-1);
 
-    if(number != 200)
+    if(number != 100)
         return -1;
     
+    rust::Result<int, std::string> r2 = rust::Result<int, std::string>::from_error("An error");
+
+    rust::Result<int, std::string> r3 = r2.or_else(test_function1);
+
+    number = r3.unwrap_or(-1);
+
+    if(number != 1000)
+        return -1;
+
     return 0;
 }
 
