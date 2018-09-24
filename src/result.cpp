@@ -5,7 +5,7 @@ namespace rust
     template<typename T, typename E>
     Result<T, E>::Result(T value): m_value{value}, m_error{}, m_t_contains_value{true}
     {
-
+        
     }
 
     template<typename T, typename E>
@@ -27,6 +27,26 @@ namespace rust
             return std::make_optional<T>(m_value);
         else
             return std::nullopt;
+    }
+    
+    template<typename T, typename E>
+    template<typename F>
+    Result<T, F> Result<T, E>::or_(Result<T, F> res)
+    {
+        if(!m_t_contains_value)
+            return res;
+        else
+            return m_value;
+    }
+    
+    template<typename T, typename E>
+    template<typename U>
+    Result<U, E> Result<T, E>::and_(Result<U, E> res)
+    {
+        if(m_t_contains_value)
+            return res;
+        else
+            return Result<U, E>::from_error(m_error);
     }
 
     template<typename T, typename E>

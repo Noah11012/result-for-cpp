@@ -18,6 +18,12 @@ namespace rust
 
         std::optional<T> ok();
         std::optional<E> err();
+        
+        template<typename F>
+        Result<T, F> or_(Result<T, F> res);
+        
+        template<typename U>
+        Result<U, E> and_(Result<U, E> res);
 
         Result<T, E> or_else(std::function<Result<T, E>(E)> op);
 
