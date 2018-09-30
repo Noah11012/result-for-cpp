@@ -10,7 +10,7 @@ namespace rust
         Result() = default;
         ~Result() = default;
 
-        Result(T value);
+        explicit Result(T value);
         static Result<T, E> from_error(E error);
 
         bool is_ok() const { return m_t_contains_value; }
