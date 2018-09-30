@@ -36,7 +36,7 @@ namespace rust
         if(!m_t_contains_value)
             return res;
         else
-            return m_value;
+            return Result<T, F>(m_value);
     }
     
     template<typename T, typename E>
