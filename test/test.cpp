@@ -1,6 +1,7 @@
 #include "../src/result.cpp"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 int test1()
 {
@@ -91,6 +92,43 @@ int test4()
     return 0;
 }
 
+enum class Failure
+{
+    ParseError
+};
+
+rust::Result<int, Failure> parse(std::string const &str)
+{
+    int value = 0;
+    for(auto const &c: str)
+    {
+        if(c >= '0' and c <= '9')
+        {
+            value *= 10;
+            value += c - '0';
+        } else {
+            return rust::Result<int, Failure>::from_error(Failure::ParseError);
+        }
+    }
+
+    return rust::Result<int, Failure>(value);
+}
+
+int test5()
+{
+    std::string s = "1\n2\n3";
+    std::string s2 = "";
+    std::istringstream iss(s);
+    while(std::getline(iss, s2, '\n'))
+    {
+        rust::Result<int, Failure> result = parse(s2).map<int>([](int x){return x * 2;});
+        if(result.is_ok())
+            std::cout << result.unwrap_or(-1) << "\n";
+    }
+
+    return 0;
+}
+
 int main()
 {
     if(test1() != 0)
@@ -103,6 +141,9 @@ int main()
         return -1;
 
     if(test4() != 0)
+        return -1;
+    
+    if(test5() != 0)
         return -1;
 
     return 0;

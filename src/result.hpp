@@ -25,6 +25,9 @@ namespace rust
         template<typename U>
         Result<U, E> and_(Result<U, E> res);
 
+        template<typename U>
+        Result<U, E> map(std::function<U(T)> op);
+
         Result<T, E> or_else(std::function<Result<T, E>(E)> op);
 
         Result<T, E> and_then(std::function<Result<T, E>(T)> op);

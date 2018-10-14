@@ -59,6 +59,16 @@ namespace rust
     }
 
     template<typename T, typename E>
+    template<typename U>
+    Result<U, E> Result<T, E>::map(std::function<U(T)> op)
+    {
+        if(!m_t_contains_value)
+            return Result<U, E>::from_error(m_error);
+        else
+            return Result<U, E>(op(m_value));
+    }
+
+    template<typename T, typename E>
     Result<T, E> Result<T, E>::or_else(std::function<Result<T, E>(E)> op)
     {
         if(!m_t_contains_value)
