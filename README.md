@@ -20,3 +20,6 @@ In other_file.cpp:
 
 ...
 ```
+
+## Documentation
+Currently, no documentation exist at the moment. The best source of documentation is at the[Rust STD Documentation](https://doc.rust-lang.org/std/result/enum.Result.html) website.
