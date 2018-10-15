@@ -22,8 +22,10 @@ namespace rust
         bool const is_err() const { return !m_t_contains_value; }
 
         std::optional<T> ok();
+        std::optional<T> ok() const;
 
         std::optional<E> err();
+        std::optional<E> err() const;
 
         template<typename F>
         Result<T, F> or_(Result<T, F> res);
