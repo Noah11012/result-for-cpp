@@ -47,6 +47,9 @@ namespace rust
         T &expect(std::string const &msg);
         T const &expect(std::string const &msg) const;
 
+        E &unwrap_err();
+        E const &unwrap_err() const;
+
         T &unwrap();
         T const &unwrap() const;
 

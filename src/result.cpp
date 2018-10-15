@@ -136,7 +136,7 @@ namespace rust
     T &Result<T, E>::unwrap()
     {
         if(!m_t_contains_value)
-            throw std::runtime_error("Unwrapping an err Result!");
+            throw std::runtime_error("called `Result::unwrap()` on an `Err` value");
 
         return m_value;
     }
@@ -145,9 +145,27 @@ namespace rust
     T const &Result<T, E>::unwrap() const
     {
         if(!m_t_contains_value)
-            throw std::runtime_error("Unwrapping an err Result!");
+            throw std::runtime_error("called `Result::unwrap()` on an `Err` value");
 
         return m_value;
+    }
+
+    template<typename T, typename E>
+    E &Result<T, E>::unwrap_err()
+    {
+        if(m_t_contains_value)
+            throw std::runtime_error(std::string("called `Result::unwrap_err()` on an `Ok` value: ") + m_value);
+
+        return m_error;
+    }
+
+    template<typename T, typename E>
+    E const &Result<T, E>::unwrap_err() const
+    {
+        if(m_t_contains_value)
+            throw std::runtime_error(std::string("called `Result::unwrap_err()` on an `Ok` value: ") + m_value);
+
+        return m_error;
     }
 
     template<typename T, typename E>
