@@ -3,6 +3,7 @@
 # C++ Result
 This is an implementation in C++ of Rust's Result. This is a WIP so not all methods found on Rust's Result type will be here at first. If you would like to help and implement the methods found in Rust's Result, that would be appreciated.
 
+## Warning
 The ability to check for equality between a `Result` and a value was added. However, one problem
 arose when this feature was added. If the template types are the same
 (for example `Result<int, int>` or `Result<std::string, std::string>`) then a compiler
