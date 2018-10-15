@@ -151,7 +151,7 @@ namespace rust
     }
 
     template<typename T, typename E>
-    T &Result<T, E>::unwrap_or(T const &optb)
+    T &Result<T, E>::unwrap_or(T &optb)
     {
         if(m_t_contains_value)
             return m_value;
