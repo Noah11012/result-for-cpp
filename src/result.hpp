@@ -50,9 +50,12 @@ namespace rust
         T &unwrap();
         T const &unwrap() const;
 
-        T &unwrap_or(T optb);
+        T &unwrap_or(T const &optb);
+        T const &unwrap_or(T const &optb) const;
 
         T &unwrap_or_else(std::function<T(E)> op);
+        T const &unwrap_or_else(std::function<T(E)> op) const;
+
     private:
         T m_value;
         E m_error;
