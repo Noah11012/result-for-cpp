@@ -21,64 +21,55 @@ namespace rust
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(const T &value)
+    bool Result<T, E>::operator ==(T const &value)
     {
-        return value == m_value;
+        return m_value == value;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(const T &value) const
+    bool Result<T, E>::operator ==(T const &value) const
     {
-        return value == m_value;
+        return m_value == value;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(const E &error)
+    bool Result<T, E>::operator ==(E const &error)
     {
-        return error == m_error;
+        return m_error == error;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(const E &error) const
+    bool Result<T, E>::operator ==(E const &error) const
     {
-        return error == m_error;
+        return m_error == error;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(const T &value)
+    bool Result<T, E>::operator !=(T const &value)
     {
-        return !(value == m_value);
+        return !(m_value == value);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(const T &value) const
+    bool Result<T, E>::operator !=(T const &value) const
     {
-        return !(value == m_value);
+        return !(m_value == value);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(const E &error)
+    bool Result<T, E>::operator !=(E const &error)
     {
-        return !(error == m_error);
+        return !(m_error == error);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(const E &error) const
+    bool Result<T, E>::operator !=(E const &error) const
     {
-        return !(error == m_error);
+        return !(m_error == error);
     }
 
     template<typename T, typename E>
     std::optional<T> Result<T, E>::ok()
-    {
-        if(m_t_contains_value)
-            return std::make_optional<T>(m_value);
-        else
-            return std::nullopt;
-    }
-
-    template<typename T, typename E>
-    std::optional<T> Result<T, E>::ok() const
     {
         if(m_t_contains_value)
             return std::make_optional<T>(m_value);
@@ -108,15 +99,6 @@ namespace rust
 
     template<typename T, typename E>
     std::optional<E> Result<T, E>::err()
-    {
-        if(!m_t_contains_value)
-            return std::make_optional<E>(m_error);
-        else
-            return std::nullopt;
-    }
-
-    template<typename T, typename E>
-    std::optional<E> Result<T, E>::err() const
     {
         if(!m_t_contains_value)
             return std::make_optional<E>(m_error);
