@@ -41,6 +41,12 @@ namespace rust
 
         Result<T, E> and_then(std::function<Result<T, E>(T)> op);
 
+        T &expect(char const *msg);
+        T const &expect(char const *msg) const;
+
+        T &expect(std::string const &msg);
+        T const &expect(std::string const &msg) const;
+
         T &unwrap();
         T const &unwrap() const;
 

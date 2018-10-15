@@ -5,7 +5,6 @@ This is an implementation in C++ of Rust's Result. This is a WIP so not all meth
 
 ### List of methods to implement
 * `iter()`
-* `map_err()`
 
 
 ## Quick Start

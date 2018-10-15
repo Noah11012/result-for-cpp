@@ -72,7 +72,10 @@ namespace rust
     template<typename F>
     Result<T, F> Result<T, E>::map_err(std::function<F(E)> op)
     {
-
+        if(m_t_contains_value)
+            return Result<T, F>(m_value);
+        else
+            return Result<T, F>::from_error(op(m_error));
     }
 
     template<typename T, typename E>
@@ -91,6 +94,60 @@ namespace rust
             return f(m_value);
         else
             return Result(m_error);
+    }
+
+    template<typename T, typename E>
+    T &Result<T, E>::expect(char const *msg)
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error(msg);
+
+        return m_value;
+    }
+
+    template<typename T, typename E>
+    T const &Result<T, E>::expect(char const *msg) const
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error(msg);
+
+        return m_value;
+    }
+
+    template<typename T, typename E>
+    T &Result<T, E>::expect(std::string const &msg)
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error(msg);
+
+        return m_value;
+    }
+
+    template<typename T, typename E>
+    T const &Result<T, E>::expect(std::string const &msg) const
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error(msg);
+
+        return m_value;
+    }
+
+    template<typename T, typename E>
+    T &Result<T, E>::unwrap()
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error("Unwrapping an err Result!");
+
+        return m_value;
+    }
+
+    template<typename T, typename E>
+    T const &Result<T, E>::unwrap() const
+    {
+        if(!m_t_contains_value)
+            throw std::runtime_error("Unwrapping an err Result!");
+
+        return m_value;
     }
 
     template<typename T, typename E>
