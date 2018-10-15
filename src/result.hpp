@@ -8,9 +8,20 @@ namespace rust
     {
     public:
 
-
         Result() = default;
         ~Result() = default;
+
+        bool operator ==(T const &value);
+        bool operator ==(T const &value) const;
+
+        bool operator ==(E const &error);
+        bool operator ==(E const &error) const;
+
+        bool operator !=(T const &value);
+        bool operator !=(T const &value) const;
+
+        bool operator !=(E const &error);
+        bool operator !=(E const &error) const;
 
         explicit Result(T value);
         static Result<T, E> from_error(E error);

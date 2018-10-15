@@ -137,11 +137,11 @@ std::string stringify(int x)
 
 int test6()
 {
-    rust::Result<int, int> x(2);
+    rust::Result<int, double> x(2);
     if(!x.map_err<std::string>(stringify).is_ok())
         return -1;
 
-    rust::Result<int, int> x2 = rust::Result<int, int>::from_error(13);
+    rust::Result<int, double> x2 = rust::Result<int, double>::from_error(13);
     if(!x2.map_err<std::string>(stringify).is_err())
         return -1;
 
@@ -150,8 +150,22 @@ int test6()
 
 int test7()
 {
-    rust::Result<int, int> x(2);
+    rust::Result<int, double> x(2);
     if(x.unwrap() != 2)
+        return -1;
+
+    return 0;
+}
+
+int test8()
+{
+    rust::Result<int, std::string> x(2);
+    rust::Result<int, std::string> x2 = rust::Result<int, std::string>::from_error("emergency failure");
+
+    if(x != 2)
+        return -1;
+
+    if(x2 != "emergency failure")
         return -1;
 
     return 0;
@@ -178,6 +192,9 @@ int main()
         return -1;
 
     if(test7() != 0)
+        return -1;
+
+    if(test8() != 0)
         return -1;
 
     return 0;
