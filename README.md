@@ -4,7 +4,7 @@
 This is an implementation in C++ of Rust's Result. This is a WIP so not all methods found on Rust's Result type will be here at first. If you would like to help and implement the methods found in Rust's Result, that would be appreciated.
 
 The ability to check for equality between a `Result` and a value was added. However, one problem
-arose when this feature was added. If the templated types are the same
+arose when this feature was added. If the template types are the same
 (for example `Result<int, int>` or `Result<std::string, std::string>`) then a compiler
 error will be displayed if equality checking is used. This bug will have to be fixed in the near future. If anyone has an idea how to remedy this problem it will be greatly appreciated.
 
