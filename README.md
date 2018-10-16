@@ -17,7 +17,7 @@ when they panic. This is because it might not be possible to convert the type in
 The ability to check for equality between a `Result` and a value was added. However, one problem
 arose when this feature was added. If the template types are the same
 (for example `Result<int, int>` or `Result<std::string, std::string>`) then a compiler
-error will be displayed if equality checking is used. This bug will have to be fixed in the near future. If anyone has an idea how to remedy this problem it will be greatly appreciated.
+error will be displayed if equality checking is used. This bug will have to be fixed in the near future. Anyone wanting to help with this issue, please work on the template branch. Your help will be appreciated.
 
 ## Quick Start
 This library contains a header and a source file. Just include the header and add the source file to your list of files to build. Result for C++ uses some C++ 17 library features so you will need a compiler that supports C++ 17.
