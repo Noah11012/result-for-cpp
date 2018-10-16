@@ -11,7 +11,7 @@ namespace rust
     template<typename E>
     Err<E>::Err(const E &error): m_error{error}
     {
-        
+
     }
 
     template<typename T, typename E>
@@ -33,51 +33,51 @@ namespace rust
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(T const &value)
+    bool Result<T, E>::operator ==(Ok<T> const &value)
     {
-        return m_okay_value.m_value == value;
+        return m_okay_value.m_value == value.m_value;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(T const &value) const
+    bool Result<T, E>::operator ==(Ok<T> const &value) const
     {
-        return m_okay_value.m_valkue == value;
+        return m_okay_value.m_value == value.m_value;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(E const &error)
+    bool Result<T, E>::operator ==(Err<E> const &error)
     {
-        return m_error_value.m_error == error;
+        return m_error_value.m_error == error.m_error;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator ==(E const &error) const
+    bool Result<T, E>::operator ==(Err<E> const &error) const
     {
-        return m_error_value.m_error == error;
+        return m_error_value.m_error == error.m_error;
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(T const &value)
+    bool Result<T, E>::operator !=(Ok<T> const &value)
     {
-        return !(m_okay_value.m_value == value);
+        return !(m_okay_value.m_value == value.m_value);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(T const &value) const
+    bool Result<T, E>::operator !=(Ok<T> const &value) const
     {
-        return !(m_okay_value.m_value == value);
+        return !(m_okay_value.m_value == value.m_value);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(E const &error)
+    bool Result<T, E>::operator !=(Err<E> const &error)
     {
-        return !(m_error_value.m_error == error);
+        return !(m_error_value.m_error == error.m_error);
     }
 
     template<typename T, typename E>
-    bool Result<T, E>::operator !=(E const &error) const
+    bool Result<T, E>::operator !=(Err<E> const &error) const
     {
-        return !(m_error_value.m_error == error);
+        return !(m_error_value.m_error == error.m_error);
     }
 
     template<typename T, typename E>
