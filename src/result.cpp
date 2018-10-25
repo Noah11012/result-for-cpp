@@ -220,7 +220,7 @@ namespace rust
     E &Result<T, E>::unwrap_err()
     {
         if(m_t_contains_value)
-            throw std::runtime_error(std::string("called `Result::unwrap_err()` on an `Ok` value: ") + m_value);
+            throw std::runtime_error("called `Result::unwrap_err()` on an `Ok` value: ");
 
         return m_error;
     }
@@ -229,7 +229,7 @@ namespace rust
     E const &Result<T, E>::unwrap_err() const
     {
         if(m_t_contains_value)
-            throw std::runtime_error(std::string("called `Result::unwrap_err()` on an `Ok` value: ") + m_value);
+            throw std::runtime_error("called `Result::unwrap_err()` on an `Ok` value: ");
 
         return m_error;
     }
