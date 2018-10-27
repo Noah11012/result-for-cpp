@@ -159,13 +159,13 @@ int test7()
 
 int test8()
 {
-    rust::Result<int, std::string> x(2);
-    rust::Result<int, std::string> x2 = rust::Result<int, std::string>::from_error("emergency failure");
+    rust::Result<int, int> x(2);
+    rust::Result<std::string, std::string> x2 = rust::Result<std::string, std::string>::from_error("emergency failure");
 
-    if(x != 2)
+    if(x != rust::Ok(2))
         return -1;
 
-    if(x2 != "emergency failure")
+    if(x2 != rust::Err(std::string("emergency failure")))
         return -1;
 
     return 0;
