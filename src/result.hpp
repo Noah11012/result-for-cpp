@@ -3,6 +3,29 @@
 
 namespace rust
 {
+    template<typename T>
+    struct Ok
+    {
+        Ok() = default;
+        ~Ok() = default;
+
+        explicit Ok(const T &value);
+
+        T m_value;
+    };
+
+    template<typename E>
+    struct Err
+    {
+        Err() = default;
+        ~Err() = default;
+
+        explicit Err(const E &error);
+
+        E m_error;
+    };
+
+
     template<typename T, typename E>
     class Result
     {
@@ -11,17 +34,17 @@ namespace rust
         Result() = default;
         ~Result() = default;
 
-        bool operator ==(T const &value);
-        bool operator ==(T const &value) const;
+        bool operator ==(Ok<T> const &value);
+        bool operator ==(Ok<T> const &value) const;
 
-        bool operator ==(E const &error);
-        bool operator ==(E const &error) const;
+        bool operator ==(Err<E> const &error);
+        bool operator ==(Err<E> const &error) const;
 
-        bool operator !=(T const &value);
-        bool operator !=(T const &value) const;
+        bool operator !=(Ok<T> const &value);
+        bool operator !=(Ok<T> const &value) const;
 
-        bool operator !=(E const &error);
-        bool operator !=(E const &error) const;
+        bool operator !=(Err<E> const &error);
+        bool operator !=(Err<E> const &error) const;
 
         explicit Result(T value);
         static Result<T, E> from_error(E error);
@@ -73,8 +96,8 @@ namespace rust
         T const &unwrap_or_else(std::function<T(E)> const &op) const;
 
     private:
-        T m_value;
-        E m_error;
+        Ok<T> m_okay_value;
+        Err<E> m_error_value;
 
         bool m_t_contains_value;
     };
