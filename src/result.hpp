@@ -39,20 +39,20 @@ namespace rust
         std::optional<E> err() const;
 
         template<typename F>
-        Result<T, F> or_(Result<T, F> res);
+        Result<T, F> or_(Result<T, F> const &res);
 
         template<typename U>
-        Result<U, E> and_(Result<U, E> res);
+        Result<U, E> and_(Result<U, E> const &res);
 
         template<typename U>
-        Result<U, E> map(std::function<U(T)> op);
+        Result<U, E> map(std::function<U(T)> const &op);
 
         template<typename F>
-        Result<T, F> map_err(std::function<F(E)> op);
+        Result<T, F> map_err(std::function<F(E)> const &op);
 
-        Result<T, E> or_else(std::function<Result<T, E>(E)> op);
+        Result<T, E> or_else(std::function<Result<T, E>(E)> const &op);
 
-        Result<T, E> and_then(std::function<Result<T, E>(T)> op);
+        Result<T, E> and_then(std::function<Result<T, E>(T)> const &op);
 
         T &expect(char const *msg);
         T const &expect(char const *msg) const;
@@ -69,8 +69,8 @@ namespace rust
         T &unwrap_or(T &optb);
         T const &unwrap_or(T const &optb) const;
 
-        T &unwrap_or_else(std::function<T(E)> op);
-        T const &unwrap_or_else(std::function<T(E)> op) const;
+        T &unwrap_or_else(std::function<T(E)> const &op);
+        T const &unwrap_or_else(std::function<T(E)> const &op) const;
 
     private:
         T m_value;

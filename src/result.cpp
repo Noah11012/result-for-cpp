@@ -88,7 +88,7 @@ namespace rust
 
     template<typename T, typename E>
     template<typename F>
-    Result<T, F> Result<T, E>::or_(Result<T, F> res)
+    Result<T, F> Result<T, E>::or_(Result<T, F> const &res)
     {
         if(!m_t_contains_value)
             return res;
@@ -98,7 +98,7 @@ namespace rust
 
     template<typename T, typename E>
     template<typename U>
-    Result<U, E> Result<T, E>::and_(Result<U, E> res)
+    Result<U, E> Result<T, E>::and_(Result<U, E> const &res)
     {
         if(m_t_contains_value)
             return res;
@@ -126,7 +126,7 @@ namespace rust
 
     template<typename T, typename E>
     template<typename U>
-    Result<U, E> Result<T, E>::map(std::function<U(T)> op)
+    Result<U, E> Result<T, E>::map(std::function<U(T)> const &op)
     {
         if(!m_t_contains_value)
             return Result<U, E>::from_error(m_error);
@@ -136,7 +136,7 @@ namespace rust
 
     template<typename T, typename E>
     template<typename F>
-    Result<T, F> Result<T, E>::map_err(std::function<F(E)> op)
+    Result<T, F> Result<T, E>::map_err(std::function<F(E)> const &op)
     {
         if(m_t_contains_value)
             return Result<T, F>(m_value);
@@ -145,7 +145,7 @@ namespace rust
     }
 
     template<typename T, typename E>
-    Result<T, E> Result<T, E>::or_else(std::function<Result<T, E>(E)> op)
+    Result<T, E> Result<T, E>::or_else(std::function<Result<T, E>(E)> const &op)
     {
         if(!m_t_contains_value)
             return op(m_error);
@@ -154,7 +154,7 @@ namespace rust
     }
 
     template<typename T, typename E>
-    Result<T, E> Result<T, E>::and_then(std::function<Result<T, E>(T)> f)
+    Result<T, E> Result<T, E>::and_then(std::function<Result<T, E>(T)> const &op)
     {
         if(m_t_contains_value)
             return f(m_value);
@@ -253,7 +253,7 @@ namespace rust
     }
 
     template<typename T, typename E>
-    T &Result<T, E>::unwrap_or_else(std::function<T(E)> op)
+    T &Result<T, E>::unwrap_or_else(std::function<T(E)> const &op)
     {
         if(m_t_contains_value)
             return m_value;
@@ -262,7 +262,7 @@ namespace rust
     }
 
     template<typename T, typename E>
-    T const &Result<T, E>::unwrap_or_else(std::function<T(E)> op) const
+    T const &Result<T, E>::unwrap_or_else(std::function<T(E)> const &op) const
     {
         if(m_t_contains_value)
             return m_value;
